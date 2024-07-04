@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name="GameBoard")
+@Table(name="Minesweeper")
 @Setter
 @Getter
 public class GameBoard {

@@ -7,7 +7,6 @@ import com.example.Minesweeper.repo.TileRepo;
 import com.example.Minesweeper.service.GameBoardService;
 import com.example.Minesweeper.service.TileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +29,9 @@ public class MinesweeperController {
     private TileService tileService;
 
     //called when starting a new Game
-    @PostMapping("/startGame")
+    @GetMapping("/startGame")
     public ResponseEntity<GameBoard> startGame(){
-        GameBoard newGame = gameBoardService.generateGameBoard();   // generates the GameBoard
+        GameBoard newGame = gameBoardService.generateGameBoard();   // generates the Minesweeper
         tileService.generateTiles(newGame);                     // generates the mineTiles
         return new ResponseEntity<>(newGame, HttpStatus.OK);
     }
