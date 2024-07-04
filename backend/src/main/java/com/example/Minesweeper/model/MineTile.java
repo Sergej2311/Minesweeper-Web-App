@@ -1,0 +1,28 @@
+package com.example.Minesweeper.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name="MineTile")
+@NoArgsConstructor
+@Setter
+@Getter
+public class MineTile {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mine-tile_generator")
+    @SequenceGenerator(name = "mine-tile_generator", sequenceName = "mine-tile_seq", allocationSize = 1)
+    private Long id;
+
+    @ManyToOne
+    GameBoard gameBoard;
+    int tileRow;
+    int tileColumn;
+
+    public MineTile(GameBoard gameBoard, int row, int column) {
+        this.gameBoard = gameBoard;
+        this.tileRow = row;
+        this.tileColumn = column;
+    }
+}
