@@ -37,6 +37,21 @@ public class MinesweeperController {
         return new ResponseEntity<>(newGame, HttpStatus.OK);
     }
 
+    @GetMapping("/getAllTiles")
+    public ResponseEntity<List<Tile>> getAllMineTiles() {
+        try {
+            List<Tile> tileList = new ArrayList<>(tileRepo.findAll());
+
+            if (tileList.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(tileList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     @GetMapping("/getAllGames")
     public ResponseEntity<List<GameBoard>> getAllMinesweepers() {
@@ -53,31 +68,21 @@ public class MinesweeperController {
         }
     }
 
-    @GetMapping("/getAllTiles")
-    public ResponseEntity<List<Tile>> getAllMineTiles() {
-        try {
-            List<Tile> tileList = new ArrayList<>(tileRepo.findAll());
-
-            if (tileList.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(tileList, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @GetMapping("/getMinesweeperById/{id}")
+    @GetMapping("/getGameById/{id}")
     public ResponseEntity<GameBoard> getMinesweeperById(@PathVariable Long id){
         Optional<GameBoard> minesweeperData = gameBoardRepo.findById(id);
 
         if (minesweeperData.isPresent()) {
             return new ResponseEntity<>(minesweeperData.get(), HttpStatus.OK);
         }
-
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+
+
+
+
+
 
     @PostMapping("/addMinesweeper")
     public ResponseEntity<GameBoard> addMinesweeper(@RequestBody GameBoard gameBoard){
