@@ -12,7 +12,7 @@ public class GameBoardService {
 
     public GameBoardService(GameBoardRepo gameBoardRepo) {this.gameBoardRepo = gameBoardRepo;}
 
-    public GameBoard generateMinesweeper() {
+    public GameBoard generateGameBoard() {
         return gameBoardRepo.save(new GameBoard());
     }
 

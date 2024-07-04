@@ -19,6 +19,8 @@ public class GameBoard {
 
     private int numCols;
 
+    private int tilesSum;
+
     private int mineCount;
 
     private int tilesClicked;
@@ -28,6 +30,7 @@ public class GameBoard {
     public GameBoard() {
         this.numRows = 8;
         this.numCols = numRows;
+        this.tilesSum = numCols*numCols;
         this.mineCount = 10;
         this.tilesClicked = 0;
         this.gameOver = false;

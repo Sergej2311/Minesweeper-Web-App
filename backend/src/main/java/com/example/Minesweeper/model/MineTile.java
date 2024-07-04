@@ -19,10 +19,14 @@ public class MineTile {
     GameBoard gameBoard;
     int tileRow;
     int tileColumn;
+    boolean isMine;
+    String tileText;
 
     public MineTile(GameBoard gameBoard, int row, int column) {
         this.gameBoard = gameBoard;
         this.tileRow = row;
         this.tileColumn = column;
+        this.isMine = false;
+        this.tileText = "";
     }
 }

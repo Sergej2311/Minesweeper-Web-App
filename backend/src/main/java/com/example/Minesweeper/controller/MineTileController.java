@@ -24,7 +24,7 @@ public class MineTileController {
 
     @PostMapping("/addMineTiles")
     public ResponseEntity<GameBoard> addMinesweeper(@RequestBody GameBoard gameBoard){
-        mineTileService.saveTile(gameBoard);
+        mineTileService.generateTiles(gameBoard);
         return new ResponseEntity<>(gameBoard, HttpStatus.OK);
     }
 
