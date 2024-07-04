@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @Setter
 @Getter
-public class MineTile {
+public class Tile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mine-tile_generator")
@@ -22,7 +22,7 @@ public class MineTile {
     boolean isMine;
     String tileText;
 
-    public MineTile(GameBoard gameBoard, int row, int column) {
+    public Tile(GameBoard gameBoard, int row, int column) {
         this.gameBoard = gameBoard;
         this.tileRow = row;
         this.tileColumn = column;
