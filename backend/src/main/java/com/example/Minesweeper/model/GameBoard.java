@@ -35,4 +35,13 @@ public class GameBoard {
         this.tilesClicked = 0;
         this.gameOver = false;
     }
+
+    public void resetGameBoard() {
+        this.numRows = 8;
+        this.numCols = numRows;
+        this.tilesSum = numCols*numCols;
+        this.mineCount = 10;
+        this.tilesClicked = 0;
+        this.gameOver = false;
+    }
 }

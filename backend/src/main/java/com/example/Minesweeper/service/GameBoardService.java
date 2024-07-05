@@ -12,9 +12,17 @@ public class GameBoardService {
 
     public GameBoardService(GameBoardRepo gameBoardRepo) {this.gameBoardRepo = gameBoardRepo;}
 
-    public GameBoard generateGameBoard() {
-        return gameBoardRepo.save(new GameBoard());
-    }
+    public GameBoard startGame () {
+        // Creates game to save
+        GameBoard savedGame = new GameBoard();
 
-    public Optional<GameBoard> findById(Long id) {return gameBoardRepo.findById(id);}
+        // Check if a Game already exists (max. 1 Game at a Time possible)
+        Optional<GameBoard> existingGame = gameBoardRepo.findById(1L);
+        if(existingGame.isPresent()) {
+            existingGame.get().resetGameBoard();    // reset Game if present
+            savedGame = existingGame.get();         // overwrite Game to save
+        }
+        gameBoardRepo.save(savedGame);
+        return savedGame;
+    }
 }

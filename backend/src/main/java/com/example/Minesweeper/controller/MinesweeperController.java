@@ -31,9 +31,9 @@ public class MinesweeperController {
     //called when starting a new Game
     @GetMapping("/startGame")
     public ResponseEntity<GameBoard> startGame(){
-        GameBoard newGame = gameBoardService.generateGameBoard();   // generates the Minesweeper
+        GameBoard newGame = gameBoardService.startGame();       // starts new game
         tileService.generateTiles(newGame);                     // generates the mineTiles
-        return new ResponseEntity<>(newGame, HttpStatus.OK);
+        return new ResponseEntity<>(newGame, HttpStatus.OK);    // returns new game and httpstatus
     }
 
     @GetMapping("/getAllTiles")
@@ -92,6 +92,7 @@ public class MinesweeperController {
 
     @DeleteMapping("/deleteMinesweeperById/{id}")
     public ResponseEntity<HttpStatus> deleteMinesweeperById(@PathVariable Long id) {
+        tileRepo.deleteAll();
         gameBoardRepo.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

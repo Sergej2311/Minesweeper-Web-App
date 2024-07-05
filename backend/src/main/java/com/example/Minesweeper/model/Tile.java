@@ -29,4 +29,9 @@ public class Tile {
         this.isMine = false;
         this.tileText = "";
     }
+
+    public void resetTile() {
+        this.isMine = false;
+        this.tileText = "";
+    }
 }

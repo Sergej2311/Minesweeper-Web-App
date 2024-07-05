@@ -5,6 +5,7 @@ import com.example.Minesweeper.model.GameBoard;
 import com.example.Minesweeper.repo.TileRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -14,9 +15,17 @@ public class TileService {
     public TileService(TileRepo tileRepo) {this.tileRepo = tileRepo;}
 
     public void generateTiles(GameBoard gameBoard) {
+        int count = 0;
         for (int i = 1; i < gameBoard.getNumRows() + 1; i++) {
             for (int j = 1; j < gameBoard.getNumCols() + 1; j++) {
-                tileRepo.save(new Tile(gameBoard, i, j));
+                Tile savedTile = new Tile(gameBoard, i, j);
+                count++;
+                Optional<Tile> existingTile = tileRepo.findById((long) count);
+                if (existingTile.isPresent() ) {
+                    existingTile.get().resetTile();
+                    savedTile = existingTile.get();
+                }
+                tileRepo.save(savedTile);
             }
         }
         int minesLeft = gameBoard.getMineCount();
