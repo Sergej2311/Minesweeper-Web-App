@@ -19,7 +19,7 @@ h1 {
 
 .board-column {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .board-tile {

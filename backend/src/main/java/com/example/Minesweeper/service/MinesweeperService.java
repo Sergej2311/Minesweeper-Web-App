@@ -18,7 +18,7 @@ public class MinesweeperService {
         // Check if a Game already exists (max. 1 Game at a Time possible)
         Optional<com.example.Minesweeper.model.Minesweeper> existingGame = minesweeper.findById(1L);
         if(existingGame.isPresent()) {
-            existingGame.get().resetGameBoard();    // reset Game if present
+            existingGame.get().resetMinesweeper();    // reset Game if present
             savedGame = existingGame.get();         // overwrite Game to save
         }
         minesweeper.save(savedGame);

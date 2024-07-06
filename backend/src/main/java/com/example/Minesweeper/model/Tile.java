@@ -11,8 +11,8 @@ import lombok.*;
 public class Tile {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mine-tile_generator")
-    @SequenceGenerator(name = "mine-tile_generator", sequenceName = "mine-tile_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tile_generator")
+    @SequenceGenerator(name = "tile_generator", sequenceName = "tile_seq", allocationSize = 1)
     private Long id;
 
     @ManyToOne

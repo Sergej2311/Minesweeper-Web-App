@@ -10,8 +10,8 @@ import lombok.*;
 public class Minesweeper {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "game-board_generator")
-    @SequenceGenerator(name = "game-board_generator", sequenceName = "game-board_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "minesweeper_generator")
+    @SequenceGenerator(name = "minesweeper_generator", sequenceName = "minesweeper_seq", allocationSize = 1)
     private Long id;
 
     private int numRows;
@@ -22,19 +22,19 @@ public class Minesweeper {
     boolean gameOver;
 
     public Minesweeper() {
-        this.numRows = 4;
+        this.numRows = 8;
         this.numCols = numRows;
         this.tilesSum = numCols*numCols;
-        this.mineCount = 4;
+        this.mineCount = 10;
         this.tilesClicked = 0;
         this.gameOver = false;
     }
 
-    public void resetGameBoard() {
-        this.numRows = 4;
+    public void resetMinesweeper() {
+        this.numRows = 8;
         this.numCols = numRows;
         this.tilesSum = numCols*numCols;
-        this.mineCount = 4;
+        this.mineCount = 10;
         this.tilesClicked = 0;
         this.gameOver = false;
     }
