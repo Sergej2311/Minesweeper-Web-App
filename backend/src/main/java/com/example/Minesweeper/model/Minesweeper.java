@@ -38,4 +38,8 @@ public class Minesweeper {
         this.tilesClicked = 0;
         this.gameOver = false;
     }
+
+    public void clickTile() {
+        this.tilesClicked++;
+    }
 }

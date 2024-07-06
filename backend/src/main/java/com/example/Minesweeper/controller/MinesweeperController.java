@@ -49,6 +49,16 @@ public class MinesweeperController {
         }
     }
 
+    @PostMapping("/tiles/left-click/{id}")
+    public ResponseEntity<Minesweeper> leftClickTile(@PathVariable Long id, @RequestBody Minesweeper minesweeper) {
+        // Check if tile was a mine
+        if(tileRepo.getReferenceById(id).isMine()){
+            minesweeperService.looseGame(minesweeper);  // loose game
+        }
+        tileService.countMinesAroundTile(id);
+        minesweeperService.clickTile(minesweeper);
+        return new ResponseEntity<>(minesweeper, HttpStatus.OK);
+    }
 
     @GetMapping("/getAllGames")
     public ResponseEntity<List<Minesweeper>> getAllMinesweepers() {

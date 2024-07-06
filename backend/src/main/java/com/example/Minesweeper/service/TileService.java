@@ -5,6 +5,7 @@ import com.example.Minesweeper.model.Minesweeper;
 import com.example.Minesweeper.repo.TileRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -39,6 +40,22 @@ public class TileService {
                minesLeft--;
            }
         }
+    }
+
+    public void countMinesAroundTile(Long id) {
+        int minesAround = 0;
+        List<Long> aroundTiles = List.of(1L, 7L, 8L, 9L);
+
+        for (Long tileId : aroundTiles) {
+            if(tileRepo.getReferenceById(id-tileId).isMine()){ // checks tile around top left, top, top right and left
+                minesAround++;
+            }
+            if(tileRepo.getReferenceById(id+tileId).isMine()){  // checks tile around bottom left, bottom, bottom right and right
+                minesAround++;
+            }
+        }
+        tileRepo.getReferenceById(id).setTileText(String.valueOf(minesAround));  // writes number of mines around in tile Text
+        tileRepo.save(tileRepo.getReferenceById(id));
     }
 
 }

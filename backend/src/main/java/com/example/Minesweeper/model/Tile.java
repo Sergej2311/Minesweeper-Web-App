@@ -20,6 +20,7 @@ public class Tile {
     int tileRow;
     int tileColumn;
     boolean mine;
+    boolean clicked;
     String tileText;
 
     public Tile(Minesweeper minesweeper, int row, int column) {
@@ -27,11 +28,13 @@ public class Tile {
         this.tileRow = row;
         this.tileColumn = column;
         this.mine = false;
+        this.clicked = false;
         this.tileText = "";
     }
 
     public void resetTile() {
         this.mine = false;
+        this.clicked = false;
         this.tileText = "";
     }
 }
