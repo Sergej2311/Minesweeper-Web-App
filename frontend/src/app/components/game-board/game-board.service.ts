@@ -9,12 +9,10 @@ export class GameBoardService {
   constructor(private http: HttpClient) { }
 
   public startGame(): Observable<Gameboard> {
-    return this.http.get<Gameboard>(`${this.apiUrl}/startGame`)
+    return this.http.get<Gameboard>(`${this.apiUrl}/startGame`);
   }
 
   public getGameBoards(): Observable<Gameboard[]> {
     return this.http.get<Gameboard[]>(`${this.apiUrl}/getAllGames`);
   }
-
-
 }

@@ -26,6 +26,7 @@ export class GameBoardComponent implements OnInit{
   ngOnInit() {
     this.getGameBoards();
     this.geTiles();
+    this.startGame();
   }
 
   public getGameBoards(): void {
