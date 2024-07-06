@@ -1,10 +1,10 @@
 package com.example.Minesweeper.controller;
 
-import com.example.Minesweeper.model.GameBoard;
+import com.example.Minesweeper.model.Minesweeper;
 import com.example.Minesweeper.model.Tile;
-import com.example.Minesweeper.repo.GameBoardRepo;
+import com.example.Minesweeper.repo.MinesweeperRepo;
 import com.example.Minesweeper.repo.TileRepo;
-import com.example.Minesweeper.service.GameBoardService;
+import com.example.Minesweeper.service.MinesweeperService;
 import com.example.Minesweeper.service.TileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,15 +13,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 @RestController
 public class MinesweeperController {
 
     @Autowired
-    private GameBoardRepo gameBoardRepo;
+    private MinesweeperRepo minesweeperRepo;
     @Autowired
-    private GameBoardService gameBoardService;
+    private MinesweeperService minesweeperService;
 
     @Autowired
     private TileRepo tileRepo;
@@ -30,10 +28,10 @@ public class MinesweeperController {
 
     //called when starting a new Game
     @GetMapping("/startGame")
-    public ResponseEntity<GameBoard> startGame(){
-        GameBoard newGame = gameBoardService.startGame();       // starts new game
-        tileService.generateTiles(newGame);                     // generates the mineTiles
-        return new ResponseEntity<>(newGame, HttpStatus.OK);    // returns new game and httpstatus
+    public ResponseEntity<Minesweeper> startGame(){
+        Minesweeper newMinesweeper = minesweeperService.startGame();       // starts new game
+        tileService.generateTiles(newMinesweeper);                     // generates the mineTiles
+        return new ResponseEntity<>(newMinesweeper, HttpStatus.OK);    // returns new game and httpstatus
     }
 
     @GetMapping("/getAllTiles")
@@ -53,9 +51,9 @@ public class MinesweeperController {
 
 
     @GetMapping("/getAllGames")
-    public ResponseEntity<List<GameBoard>> getAllMinesweepers() {
+    public ResponseEntity<List<Minesweeper>> getAllMinesweepers() {
         try {
-            List<GameBoard> gameBoardList = new ArrayList<>(gameBoardRepo.findAll());
+            List<Minesweeper> gameBoardList = new ArrayList<>(minesweeperRepo.findAll());
 
             if (gameBoardList.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -65,15 +63,5 @@ public class MinesweeperController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    @GetMapping("/getGameById/{id}")
-    public ResponseEntity<GameBoard> getMinesweeperById(@PathVariable Long id){
-        Optional<GameBoard> minesweeperData = gameBoardRepo.findById(id);
-
-        if (minesweeperData.isPresent()) {
-            return new ResponseEntity<>(minesweeperData.get(), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

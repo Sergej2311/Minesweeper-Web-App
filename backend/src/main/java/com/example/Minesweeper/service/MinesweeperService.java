@@ -1,15 +1,15 @@
 package com.example.Minesweeper.service;
 
-import com.example.Minesweeper.repo.Minesweeper;
+import com.example.Minesweeper.repo.MinesweeperRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class GameBoardService {
-    private final Minesweeper minesweeper;
+public class MinesweeperService {
+    private final MinesweeperRepo minesweeper;
 
-    public GameBoardService(Minesweeper minesweeper) {this.minesweeper = minesweeper;}
+    public MinesweeperService(MinesweeperRepo minesweeper) {this.minesweeper = minesweeper;}
 
     public com.example.Minesweeper.model.Minesweeper startGame () {
         // Creates game to save
