@@ -1,0 +1,36 @@
+h1 {
+  display: flex;
+  justify-content: center;
+}
+
+.minesweeper-board {
+  display: flex;
+  justify-content: center;
+  background-color: #00004c;
+  width: fit-content;
+  margin: auto;
+  border: 1px solid #00004c;
+}
+
+.board-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.board-column {
+  display: flex;
+  flex-direction: row;
+}
+
+.board-tile {
+  border: none;
+  width: 48px;
+  height: 48px;
+  margin: 1px;
+;
+  background-color: #ecf8ff;
+}
+
+.board-tile:hover {
+  background-color: #d5f1ff;
+}

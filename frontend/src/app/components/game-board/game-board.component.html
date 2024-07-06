@@ -1,4 +1,8 @@
-<div *ngFor="let gameBoard of gameBoards">
-  <div>{{gameBoard.id}}</div>
+<h1>Minesweeper Solver</h1>
+<div>
+  <div class="minesweeper-board">
+    <div class="board-row" *ngFor="let row of tiles.slice(0,8)">
+      <div class="board-column" *ngFor="let tile of tiles.slice((row.id-1)*8, (row.id*8))"><button class="board-tile">{{tile.tileText}}</button></div>
+    </div>
+  </div>
 </div>
-<button (click)="getGameBoards()">Test</button>
