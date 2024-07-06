@@ -28,19 +28,19 @@ public class Minesweeper {
     boolean gameOver;
 
     public Minesweeper() {
-        this.numRows = 8;
+        this.numRows = 4;
         this.numCols = numRows;
         this.tilesSum = numCols*numCols;
-        this.mineCount = 10;
+        this.mineCount = 4;
         this.tilesClicked = 0;
         this.gameOver = false;
     }
 
     public void resetGameBoard() {
-        this.numRows = 8;
+        this.numRows = 4;
         this.numCols = numRows;
         this.tilesSum = numCols*numCols;
-        this.mineCount = 10;
+        this.mineCount = 4;
         this.tilesClicked = 0;
         this.gameOver = false;
     }

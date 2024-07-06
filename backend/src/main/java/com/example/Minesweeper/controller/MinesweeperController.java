@@ -27,14 +27,14 @@ public class MinesweeperController {
     private TileService tileService;
 
     //called when starting a new Game
-    @GetMapping("/startGame")
+    @PostMapping("/startGame")
     public ResponseEntity<Minesweeper> startGame(){
         Minesweeper newMinesweeper = minesweeperService.startGame();       // starts new game
         tileService.generateTiles(newMinesweeper);                     // generates the mineTiles
         return new ResponseEntity<>(newMinesweeper, HttpStatus.OK);    // returns new game and httpstatus
     }
 
-    @GetMapping("/getAllTiles")
+    @GetMapping("/tiles/all")
     public ResponseEntity<List<Tile>> getAllMineTiles() {
         try {
             List<Tile> tileList = new ArrayList<>(tileRepo.findAll());
