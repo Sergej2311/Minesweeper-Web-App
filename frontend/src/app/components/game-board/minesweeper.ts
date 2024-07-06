@@ -4,7 +4,7 @@ export interface Gameboard {
   numCols: number;
   tilesSum: number;
   mineCount: number;
-  tilesClicked: number
+  tilesClicked: number;
   gameOver: boolean;
 }
 
@@ -13,6 +13,6 @@ export interface Tile {
   gameBoard: Gameboard;
   tileRow: number;
   tileColumn: number;
-  isMine: boolean;
+  mine: boolean;
   tileText: string;
 }

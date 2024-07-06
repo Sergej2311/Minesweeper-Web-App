@@ -14,17 +14,11 @@ public class Minesweeper {
     @SequenceGenerator(name = "game-board_generator", sequenceName = "game-board_seq", allocationSize = 1)
     private Long id;
 
-
     private int numRows;
-
     private int numCols;
-
     private int tilesSum;
-
     private int mineCount;
-
     private int tilesClicked;
-
     boolean gameOver;
 
     public Minesweeper() {

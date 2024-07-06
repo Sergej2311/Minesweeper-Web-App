@@ -27,7 +27,7 @@ public class MinesweeperController {
     private TileService tileService;
 
     //called when starting a new Game
-    @PostMapping("/startGame")
+    @GetMapping("/startGame")
     public ResponseEntity<Minesweeper> startGame(){
         Minesweeper newMinesweeper = minesweeperService.startGame();       // starts new game
         tileService.generateTiles(newMinesweeper);                     // generates the mineTiles

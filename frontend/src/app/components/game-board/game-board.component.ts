@@ -24,9 +24,9 @@ export class GameBoardComponent implements OnInit{
   constructor(private gameboardService: GameBoardService, private tileService: TileService) { }
 
   ngOnInit() {
+    this.startGame();
     this.getGameBoards();
     this.geTiles();
-    this.startGame();
   }
 
   public getGameBoards(): void {
@@ -52,6 +52,14 @@ export class GameBoardComponent implements OnInit{
   }
 
   public startGame(): void {
-    this.gameboardService.startGame();
+    this.gameboardService.startGame().subscribe(
+      (response: Gameboard) => {
+        console.log(response);
+        this.getGameBoards();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 }
