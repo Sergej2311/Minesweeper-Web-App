@@ -9,7 +9,7 @@ export class TileService {
   constructor(private http: HttpClient) { }
 
   public getTiles(): Observable<Tile[]> {
-    return this.http.get<Tile[]>(`${this.apiUrl}/getAllTiles`)
+    return this.http.get<Tile[]>(`${this.apiUrl}/tiles/all`)
   }
 
 }

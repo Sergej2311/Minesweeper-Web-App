@@ -7,7 +7,7 @@ import lombok.*;
 @Table(name="Minesweeper")
 @Setter
 @Getter
-public class GameBoard {
+public class Minesweeper {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "game-board_generator")
@@ -27,7 +27,7 @@ public class GameBoard {
 
     boolean gameOver;
 
-    public GameBoard() {
+    public Minesweeper() {
         this.numRows = 8;
         this.numCols = numRows;
         this.tilesSum = numCols*numCols;

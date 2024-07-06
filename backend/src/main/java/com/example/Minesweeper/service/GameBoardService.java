@@ -1,28 +1,27 @@
 package com.example.Minesweeper.service;
 
-import com.example.Minesweeper.model.GameBoard;
-import com.example.Minesweeper.repo.GameBoardRepo;
+import com.example.Minesweeper.repo.Minesweeper;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 public class GameBoardService {
-    private final GameBoardRepo gameBoardRepo;
+    private final Minesweeper minesweeper;
 
-    public GameBoardService(GameBoardRepo gameBoardRepo) {this.gameBoardRepo = gameBoardRepo;}
+    public GameBoardService(Minesweeper minesweeper) {this.minesweeper = minesweeper;}
 
-    public GameBoard startGame () {
+    public com.example.Minesweeper.model.Minesweeper startGame () {
         // Creates game to save
-        GameBoard savedGame = new GameBoard();
+        com.example.Minesweeper.model.Minesweeper savedGame = new com.example.Minesweeper.model.Minesweeper();
 
         // Check if a Game already exists (max. 1 Game at a Time possible)
-        Optional<GameBoard> existingGame = gameBoardRepo.findById(1L);
+        Optional<com.example.Minesweeper.model.Minesweeper> existingGame = minesweeper.findById(1L);
         if(existingGame.isPresent()) {
             existingGame.get().resetGameBoard();    // reset Game if present
             savedGame = existingGame.get();         // overwrite Game to save
         }
-        gameBoardRepo.save(savedGame);
+        minesweeper.save(savedGame);
         return savedGame;
     }
 }

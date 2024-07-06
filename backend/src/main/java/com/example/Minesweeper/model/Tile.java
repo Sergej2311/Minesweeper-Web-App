@@ -16,22 +16,22 @@ public class Tile {
     private Long id;
 
     @ManyToOne
-    GameBoard gameBoard;
+    Minesweeper minesweeper;
     int tileRow;
     int tileColumn;
-    boolean isMine;
+    boolean mine;
     String tileText;
 
-    public Tile(GameBoard gameBoard, int row, int column) {
-        this.gameBoard = gameBoard;
+    public Tile(Minesweeper minesweeper, int row, int column) {
+        this.minesweeper = minesweeper;
         this.tileRow = row;
         this.tileColumn = column;
-        this.isMine = false;
+        this.mine = false;
         this.tileText = "";
     }
 
     public void resetTile() {
-        this.isMine = false;
+        this.mine = false;
         this.tileText = "";
     }
 }
