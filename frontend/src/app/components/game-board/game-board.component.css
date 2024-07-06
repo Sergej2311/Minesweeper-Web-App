@@ -4,7 +4,6 @@ h1 {
 }
 
 .minesweeper-board {
-  display: flex;
   justify-content: center;
   background-color: #00004c;
   width: fit-content;
@@ -14,12 +13,6 @@ h1 {
 
 .board-row {
   display: flex;
-  flex-direction: column;
-}
-
-.board-column {
-  display: flex;
-  flex-direction: column;
 }
 
 .board-tile {
