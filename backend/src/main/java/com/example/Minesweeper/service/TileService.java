@@ -72,4 +72,13 @@ public class TileService {
         tileRepo.save(flagedTile);
     }
 
+    public void solve() {
+        List<Tile> allTiles = tileRepo.findAll();
+        for (Tile tile : allTiles) {
+            if (tile.isMine()) {
+                tile.setTileText("💣");
+                tileRepo.save(tile);
+            }
+        }
+    }
 }

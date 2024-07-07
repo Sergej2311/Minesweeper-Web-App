@@ -24,11 +24,11 @@ export class MinesweeperService {
     return this.http.post<Minesweeper>(`${this.backendUrl}/tiles/left-click/${tileId}`, minesweeper);
   }
 
-  public rightClickTile(tileId: number, minesweeper: Minesweeper): Observable<Minesweeper> {
-    return this.http.post<Minesweeper>(`${this.backendUrl}/tiles/right-click/${tileId}`, minesweeper);
+  public rightClickTile(tileId: number): Observable<Minesweeper> {
+    return this.http.get<Minesweeper>(`${this.backendUrl}/tiles/right-click/${tileId}`);
   }
 
-  public solve(minesweeper: Minesweeper): Observable<Minesweeper> {
-    return this.http.post<Minesweeper>(`${this.backendUrl}/tiles/solve`, minesweeper);
+  public solve(): Observable<Minesweeper> {
+    return this.http.get<Minesweeper>(`${this.backendUrl}/tiles/solve`);
   }
 }

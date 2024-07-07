@@ -28,7 +28,7 @@ h1 {
   width: 48px;
   height: 48px;
   margin: 1px;
-  background-color: #ecf8ff;
+  background-color: #f5faff;
 }
 
 .tile-0 {
@@ -36,11 +36,11 @@ h1 {
 }
 
 .tile-clicked-true {
-  background: #c2d1ff;
+  background: #d5e0ff;
 }
 
 .tile-mine-true {
-  background-color: #ecf8ff;
+  background-color: #f5faff;
 }
 
 .board-tile:hover {
@@ -59,7 +59,7 @@ h1 {
   border-color: #cb0505;
   border-radius: 5px;
   background: #fdecec;
-  font-size: 16px;
+  font-size: 24px;
   padding: 2px 10px;
   color: #da4141;
   transition: all 0.3s ease 0s;
@@ -78,7 +78,7 @@ h1 {
   border-color: darkgreen;
   border-radius: 5px;
   background: #abffab;
-  font-size: 16px;
+  font-size: 24px;
   padding: 2px 10px;
   color: #000000;
   transition: all 0.3s ease 0s;

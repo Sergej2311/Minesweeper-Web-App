@@ -76,8 +76,8 @@ export class MinesweeperComponent implements OnInit{
     );
   }
 
-  public rightClickTile(tileId: number, minesweeper: Minesweeper): void {
-    this.minesweeperService.rightClickTile(tileId, minesweeper).subscribe(
+  public rightClickTile(tileId: number): void {
+    this.minesweeperService.rightClickTile(tileId).subscribe(
       () => {
         this.loadData();
       },
@@ -87,8 +87,8 @@ export class MinesweeperComponent implements OnInit{
     );
   }
 
-  public revealMines(minesweeper: Minesweeper): void {
-    this.minesweeperService.solve(minesweeper).subscribe(
+  public solve(): void {
+    this.minesweeperService.solve().subscribe(
       () => {
         this.loadData();
       },
