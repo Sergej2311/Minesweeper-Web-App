@@ -29,7 +29,7 @@ export class MinesweeperComponent implements OnInit{
 
   public loadGame() {
     this.getGameBoards();
-    this.geTiles();
+    this.getTiles();
   }
 
   public getGameBoards(): void {
@@ -43,7 +43,7 @@ export class MinesweeperComponent implements OnInit{
     );
   }
 
-  public geTiles(): void {
+  public getTiles(): void {
     this.tileService.getTiles().subscribe(
       (response: Tile[]) => {
         this.tiles = response;
@@ -55,7 +55,7 @@ export class MinesweeperComponent implements OnInit{
   }
 
   public createGame(): void {
-    this.gameboardService.createGame().subscribe(
+    this.gameboardService.startMinesweeper().subscribe(
       () => {
         this.getGameBoards();
       },

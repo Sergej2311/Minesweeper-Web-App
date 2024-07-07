@@ -8,7 +8,7 @@ export class MinesweeperService {
   private apiUrl = 'http://localhost:8080';
   constructor(private http: HttpClient) { }
 
-  public createGame(): Observable<Gameboard> {
+  public startMinesweeper(): Observable<Gameboard> {
     return this.http.get<Gameboard>(`${this.apiUrl}/createGame`);
   }
 
