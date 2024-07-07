@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Minesweeper, Tile} from "./minesweeper";
 import {MinesweeperService} from "./minesweeper.service";
-import {NgFor, NgIf} from "@angular/common";
+import {DOCUMENT, NgFor, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 
@@ -20,11 +20,11 @@ export class MinesweeperComponent implements OnInit{
   public minesweeper: Minesweeper;
   public tiles: Tile[] = [];
 
-  constructor(private minesweeperService: MinesweeperService) { }
+  constructor(private minesweeperService: MinesweeperService, @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit() {
     this.initializeMinesweeper();
-    document.addEventListener('contextmenu', event => event.preventDefault());
+    this.document.addEventListener('contextmenu', event => event.preventDefault());
   }
 
   public loadData() {

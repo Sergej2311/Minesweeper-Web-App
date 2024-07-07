@@ -36,7 +36,11 @@ h1 {
 }
 
 .tile-clicked-true {
-  background: #97b2ff;
+  background: #c2d1ff;
+}
+
+.tile-mine-true {
+  background-color: #ecf8ff;
 }
 
 .board-tile:hover {
