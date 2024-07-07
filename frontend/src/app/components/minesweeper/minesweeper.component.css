@@ -46,3 +46,21 @@ h1 {
 .board-tile:hover {
   opacity: 0.9;
 }
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+#btn-restart {
+  border-style: solid;
+  border-color: #cb0505;
+  border-radius: 5px;
+  background: #fdecec;
+  font-size: 16px;
+  padding: 2px 10px;
+  color: #da4141;
+  transition: all 0.3s ease 0s;
+}
