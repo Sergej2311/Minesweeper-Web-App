@@ -39,7 +39,7 @@ public class TileService {
            Tile tile = tileRepo.getReferenceById(random.nextLong(minesweeper.getTilesSum())+1);
            if(!tile.isMine()){
                tile.setMine(true);
-               tile.setTileText("X");
+               //tile.setTileText("💣");
                tileRepo.save(tile);
                minesLeft--;
            }
@@ -69,7 +69,7 @@ public class TileService {
     public void setFlag(Long id) {
         Tile flagedTile = tileRepo.getReferenceById(id);
         minesweeperService.clickTile(tileRepo.getReferenceById(id));
-        flagedTile.setTileText("F");
+        flagedTile.setTileText("🚩");
         tileRepo.save(flagedTile);
     }
 
