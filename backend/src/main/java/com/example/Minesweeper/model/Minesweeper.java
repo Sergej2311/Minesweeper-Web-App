@@ -19,6 +19,7 @@ public class Minesweeper {
     private int tilesSum;
     private int mineCount;
     private int tilesClicked;
+    boolean gameWon;
     boolean gameOver;
 
     public Minesweeper() {
@@ -28,6 +29,7 @@ public class Minesweeper {
         this.mineCount = 10;
         this.tilesClicked = 0;
         this.gameOver = false;
+        this.gameWon = false;
     }
 
     public void resetMinesweeper() {
@@ -37,9 +39,13 @@ public class Minesweeper {
         this.mineCount = 10;
         this.tilesClicked = 0;
         this.gameOver = false;
+        this.gameWon = false;
     }
 
     public void clickTile() {
         this.tilesClicked++;
+        if (this.tilesClicked == this.tilesSum) {
+            this.gameWon = true;
+        }
     }
 }

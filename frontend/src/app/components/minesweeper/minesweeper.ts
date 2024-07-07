@@ -6,6 +6,7 @@ export interface Minesweeper {
   mineCount: number;
   tilesClicked: number;
   gameOver: boolean;
+  gameWon: boolean;
 }
 
 export interface Tile {

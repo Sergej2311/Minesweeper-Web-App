@@ -1,4 +1,5 @@
-<h1>Minesweeper Solver {{ minesweeper.gameOver }}</h1>
+<h1>Minesweeper Solver</h1>
+<h1 *ngIf="minesweeper.gameWon">DU HAST GEWONNEN!</h1>
 <div>
   <div class="minesweeper-board">
     <div class="board-row" *ngFor="let row of tiles.slice(0,8)">
