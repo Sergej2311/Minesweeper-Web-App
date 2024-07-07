@@ -12,8 +12,11 @@ import java.util.Random;
 @Service
 public class TileService {
     private final TileRepo tileRepo;
+    private final MinesweeperService minesweeperService;
 
-    public TileService(TileRepo tileRepo) {this.tileRepo = tileRepo;}
+    public TileService(TileRepo tileRepo, MinesweeperService minesweeperService) {this.tileRepo = tileRepo;
+        this.minesweeperService = minesweeperService;
+    }
 
     public void generateTiles(Minesweeper minesweeper) {
         int count = 0;
@@ -29,6 +32,7 @@ public class TileService {
                 tileRepo.save(savedTile);
             }
         }
+
         int minesLeft = minesweeper.getMineCount();
         while (minesLeft > 0){
            Random random = new Random();
@@ -40,23 +44,31 @@ public class TileService {
                minesLeft--;
            }
         }
+
+        List<Tile> allTiles = tileRepo.findAll();
+        for (Tile tile : allTiles) {
+            int minesAround = 0;
+            List<Long> tilesAround = tile.getTileIdsAround();
+            for (Long tileAround : tilesAround) {
+                if(tileRepo.getReferenceById(tileAround).isMine()){
+                    minesAround++;
+                }
+            }
+            tile.setMinesAround(minesAround);
+            tileRepo.save(tile);
+        }
     }
 
-    public void countMinesAroundTile(Long id) {
-        Tile checkedTile = tileRepo.getReferenceById(id);
-        List<Long> tilesAround = checkedTile.getTileIdsAround();
-        int minesAround = 0;
-        for (Long tileAround : tilesAround) {
-            if(tileRepo.getReferenceById(tileAround).isMine()){
-                minesAround++;
-            }
-        }
-        checkedTile.setTileText(String.valueOf(minesAround));  // writes number of mines around in tile Text
-        tileRepo.save(checkedTile);
+    public void revealMinesAroundTile(Long id) {
+        Tile revealedTile = tileRepo.getReferenceById(id);
+        revealedTile.revealMines();
+        minesweeperService.clickTile(revealedTile);
+        tileRepo.save(tileRepo.getReferenceById(id));
     }
 
     public void setFlag(Long id) {
         Tile flagedTile = tileRepo.getReferenceById(id);
+        minesweeperService.clickTile(tileRepo.getReferenceById(id));
         flagedTile.setTileText("F");
         tileRepo.save(flagedTile);
     }

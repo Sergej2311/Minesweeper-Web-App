@@ -65,8 +65,14 @@ public class MinesweeperController {
             minesweeperService.looseGame(minesweeper);  // loose game
         }
         else{
-            tileService.countMinesAroundTile(id);
-            minesweeperService.clickTile(minesweeper);
+            tileService.revealMinesAroundTile(id);
+            Tile tileToReveal = tileRepo.getReferenceById(id);
+            if (tileToReveal.getMinesAround() == 0) {
+                for (Long tileId : tileToReveal.getTileIdsAround()) {
+                    tileService.revealMinesAroundTile(tileId);
+                }
+            }
+            tileService.revealMinesAroundTile(id);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -75,7 +81,6 @@ public class MinesweeperController {
     public ResponseEntity<?> rightClickTile(@PathVariable Long id, @RequestBody Minesweeper minesweeper) {
         if(tileRepo.getReferenceById(id).isMine()){
             tileService.setFlag(id);
-            minesweeperService.clickTile(minesweeper);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }

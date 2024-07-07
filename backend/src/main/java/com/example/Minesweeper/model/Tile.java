@@ -23,6 +23,7 @@ public class Tile {
     int tileRow;
     int tileColumn;
     boolean mine;
+    int minesAround;
     boolean clicked;
     String tileText;
 
@@ -39,6 +40,10 @@ public class Tile {
         this.mine = false;
         this.clicked = false;
         this.tileText = "";
+    }
+
+    public void revealMines() {
+        this.setTileText(String.valueOf(this.minesAround));
     }
 
     public List<Long> getTileIdsAround() {

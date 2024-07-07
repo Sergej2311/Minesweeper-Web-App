@@ -15,5 +15,6 @@ export interface Tile {
   tileRow: number;
   tileColumn: number;
   mine: boolean;
+  minesAround: number;
   tileText: string;
 }

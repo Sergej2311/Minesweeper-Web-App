@@ -1,6 +1,7 @@
 package com.example.Minesweeper.service;
 
 import com.example.Minesweeper.model.Minesweeper;
+import com.example.Minesweeper.model.Tile;
 import com.example.Minesweeper.repo.MinesweeperRepo;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +27,11 @@ public class MinesweeperService {
         return savedGame;
     }
 
-    public void clickTile (Minesweeper minesweeper) {
-        minesweeper.clickTile();
-        minesweeperRepo.save(minesweeper);
+    public void clickTile(Tile tile) {
+        if(!tile.isClicked()){
+            tile.setClicked(true);
+            tile.getMinesweeper().clickTile();
+        }
     }
 
     public void looseGame(Minesweeper minesweeper) {
