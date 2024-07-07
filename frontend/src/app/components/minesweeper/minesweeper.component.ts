@@ -65,8 +65,8 @@ export class MinesweeperComponent implements OnInit{
     );
   }
 
-  public leftClickTile(tileId: number, gameboard: Minesweeper): void {
-    this.minesweeperService.leftClickTile(tileId, gameboard).subscribe(
+  public leftClickTile(tileId: number, minesweeper: Minesweeper): void {
+    this.minesweeperService.leftClickTile(tileId, minesweeper).subscribe(
       () => {
         this.loadData();
       },
@@ -76,8 +76,19 @@ export class MinesweeperComponent implements OnInit{
     );
   }
 
-  public rightClickTile(tileId: number, gameboard: Minesweeper): void {
-    this.minesweeperService.rightClickTile(tileId, gameboard).subscribe(
+  public rightClickTile(tileId: number, minesweeper: Minesweeper): void {
+    this.minesweeperService.rightClickTile(tileId, minesweeper).subscribe(
+      () => {
+        this.loadData();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public revealMines(minesweeper: Minesweeper): void {
+    this.minesweeperService.solve(minesweeper).subscribe(
       () => {
         this.loadData();
       },

@@ -17,6 +17,7 @@ h1 {
   height: auto;
   display: flex;
   align-items: center;
+  justify-content: center;
   font-family: Poppins, sans-serif;
   letter-spacing: 1px;
 }

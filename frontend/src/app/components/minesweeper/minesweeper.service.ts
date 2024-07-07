@@ -27,4 +27,8 @@ export class MinesweeperService {
   public rightClickTile(tileId: number, minesweeper: Minesweeper): Observable<Minesweeper> {
     return this.http.post<Minesweeper>(`${this.backendUrl}/tiles/right-click/${tileId}`, minesweeper);
   }
+
+  public solve(minesweeper: Minesweeper): Observable<Minesweeper> {
+    return this.http.post<Minesweeper>(`${this.backendUrl}/tiles/solve`, minesweeper);
+  }
 }
