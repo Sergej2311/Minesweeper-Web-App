@@ -1,0 +1,22 @@
+header {
+  width: 100%;
+  height: min-content;
+  padding: 0 0;
+  color: #fbfbfbfe;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  background: rgb(92, 84, 255);
+  background: linear-gradient(156deg, rgb(54, 46, 255) 11%, rgba(20, 11, 184, 1) 46%, rgba(6, 0, 116, 1) 100%);
+  box-shadow: 0 5px 10px rgba(94, 94, 94, 0.15);
+}
+
+h1 {
+  margin: 0;
+  padding: 10px;
+  font-size: 2.5rem;
+  height: auto;
+  display: flex;
+  align-items: center;
+  font-family: Poppins, sans-serif;
+  letter-spacing: 1px;
+}

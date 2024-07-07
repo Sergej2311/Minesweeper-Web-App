@@ -7,7 +7,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {TileService} from "./tile.service";
 
 @Component({
-  selector: 'app-game-board',
+  selector: 'minesweeper',
   standalone: true,
   imports: [
     NgFor,
@@ -18,7 +18,7 @@ import {TileService} from "./tile.service";
   styleUrl: './minesweeper.component.css'
 })
 export class MinesweeperComponent implements OnInit{
-  public minesweeper!: Minesweeper;
+  public minesweeper: Minesweeper;
   public tiles: Tile[] = [];
 
   constructor(private minesweeperService: MinesweeperService, private tileService: TileService) { }
@@ -31,7 +31,6 @@ export class MinesweeperComponent implements OnInit{
     this.getMinesweeper();
     this.getTiles();
     this.getMinesweeper();
-    document.addEventListener('contextmenu', event => event.preventDefault());
   }
 
   public getMinesweeper(): void {
