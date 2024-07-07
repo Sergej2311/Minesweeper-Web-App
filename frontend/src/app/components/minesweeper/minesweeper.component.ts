@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Gameboard, Tile} from "./minesweeper";
-import {GameBoardService} from "./game-board.service";
+import {MinesweeperService} from "./minesweeper.service";
 import {NgFor, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -14,14 +14,14 @@ import {TileService} from "./tile.service";
     FormsModule,
     NgIf
   ],
-  templateUrl: './game-board.component.html',
-  styleUrl: './game-board.component.css'
+  templateUrl: './minesweeper.component.html',
+  styleUrl: './minesweeper.component.css'
 })
-export class GameBoardComponent implements OnInit{
+export class MinesweeperComponent implements OnInit{
   public gameBoards: Gameboard[] = [];
   public tiles: Tile[] = [];
 
-  constructor(private gameboardService: GameBoardService, private tileService: TileService) { }
+  constructor(private gameboardService: MinesweeperService, private tileService: TileService) { }
 
   ngOnInit() {
     this.createGame();
