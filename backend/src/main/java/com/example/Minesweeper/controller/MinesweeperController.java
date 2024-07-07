@@ -77,6 +77,10 @@ public class MinesweeperController {
 
     @GetMapping("/minesweeper/{id}")
     public ResponseEntity<Minesweeper> getMinesweeper(@PathVariable Long id) {
-        return new ResponseEntity<>(minesweeperRepo.getReferenceById(id), HttpStatus.OK);
+        if (minesweeperRepo.findById(id).isPresent()) {
+            Minesweeper minesweeper = minesweeperRepo.findById(id).get();
+            return new ResponseEntity<>(minesweeper, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

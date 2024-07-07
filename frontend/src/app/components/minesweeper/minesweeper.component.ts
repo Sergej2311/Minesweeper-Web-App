@@ -18,7 +18,7 @@ import {TileService} from "./tile.service";
   styleUrl: './minesweeper.component.css'
 })
 export class MinesweeperComponent implements OnInit{
-  public minesweepers: Minesweeper[] = [];
+  public minesweeper!: Minesweeper;
   public tiles: Tile[] = [];
 
   constructor(private minesweeperService: MinesweeperService, private tileService: TileService) { }
@@ -28,14 +28,15 @@ export class MinesweeperComponent implements OnInit{
   }
 
   public loadGame() {
-    this.getGameBoards();
+    this.getMinesweeper();
     this.getTiles();
+    this.getMinesweeper();
   }
 
-  public getGameBoards(): void {
+  public getMinesweeper(): void {
     this.minesweeperService.getMinesweeper().subscribe(
-      (response: Minesweeper[]) => {
-        this.minesweepers = response;
+      (response: Minesweeper) => {
+        this.minesweeper = response;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -57,7 +58,7 @@ export class MinesweeperComponent implements OnInit{
   public createGame(): void {
     this.minesweeperService.startMinesweeper().subscribe(
       () => {
-        this.getGameBoards();
+        this.loadGame();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -68,7 +69,7 @@ export class MinesweeperComponent implements OnInit{
   public leftClickTile(tileId: number, gameboard: Minesweeper): void {
     this.minesweeperService.leftClickTile(tileId, gameboard).subscribe(
       () => {
-        this.getGameBoards();
+        this.getMinesweeper();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

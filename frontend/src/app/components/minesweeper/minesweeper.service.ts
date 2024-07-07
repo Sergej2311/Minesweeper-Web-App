@@ -12,8 +12,8 @@ export class MinesweeperService {
     return this.http.get<Minesweeper>(`${this.apiUrl}/createGame`);
   }
 
-  public getMinesweeper(): Observable<Minesweeper[]> {
-    return this.http.get<Minesweeper[]>(`${this.apiUrl}/getAllGames`);
+  public getMinesweeper(): Observable<Minesweeper> {
+    return this.http.get<Minesweeper>(`${this.apiUrl}/minesweeper/1`);
   }
 
   public leftClickTile(tileId: number, gameboard: Minesweeper): Observable<Minesweeper> {
