@@ -4,6 +4,6 @@ If you click all safe tiles (left click) and flag all mines (right click) you wi
 Should you left click on a mine you loose!
 
 To start the web app you have to:
-- start the MinesweeperApllicaton Java class (backend)
+- start the MinesweeperApllication Java class (backend)
 - install the npm packages with "npm install"
 - navigate to the frontend directory and start with "ng serve"
