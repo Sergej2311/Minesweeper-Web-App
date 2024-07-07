@@ -39,7 +39,6 @@ public class TileService {
            Tile tile = tileRepo.getReferenceById(random.nextLong(minesweeper.getTilesSum())+1);
            if(!tile.isMine()){
                tile.setMine(true);
-               //tile.setTileText("💣");
                tileRepo.save(tile);
                minesLeft--;
            }
