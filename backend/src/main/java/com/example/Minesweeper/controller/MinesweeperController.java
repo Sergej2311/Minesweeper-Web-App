@@ -26,8 +26,8 @@ public class MinesweeperController {
     @Autowired
     private TileService tileService;
 
-    //called when starting a new Game
-    @GetMapping("/startGame")
+    //creates a new game
+    @GetMapping("/createGame")
     public ResponseEntity<Minesweeper> startGame(){
         Minesweeper newMinesweeper = minesweeperService.startGame();        // starts new game
         tileService.generateTiles(newMinesweeper);                          // generates the mineTiles
@@ -73,5 +73,10 @@ public class MinesweeperController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/minesweeper/{id}")
+    public ResponseEntity<Minesweeper> getMinesweeper(@PathVariable Long id) {
+        return new ResponseEntity<>(minesweeperRepo.getReferenceById(id), HttpStatus.OK);
     }
 }

@@ -8,11 +8,15 @@ export class GameBoardService {
   private apiUrl = 'http://localhost:8080';
   constructor(private http: HttpClient) { }
 
-  public startGame(): Observable<Gameboard> {
-    return this.http.get<Gameboard>(`${this.apiUrl}/startGame`);
+  public createGame(): Observable<Gameboard> {
+    return this.http.get<Gameboard>(`${this.apiUrl}/createGame`);
   }
 
   public getGameBoards(): Observable<Gameboard[]> {
     return this.http.get<Gameboard[]>(`${this.apiUrl}/getAllGames`);
+  }
+
+  public leftClickTile(tileId: number, gameboard: Gameboard): Observable<Gameboard> {
+    return this.http.post<Gameboard>(`${this.apiUrl}/tiles/left-click/${tileId}`, gameboard);
   }
 }
