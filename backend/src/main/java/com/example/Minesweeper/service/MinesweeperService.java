@@ -13,29 +13,30 @@ public class MinesweeperService {
 
     public MinesweeperService(MinesweeperRepo minesweeper) {this.minesweeperRepo = minesweeper;}
 
+    // starts a new game, only one game at a time is possible
     public Minesweeper startGame () {
-        // Creates game to save
-       Minesweeper savedGame = new Minesweeper();
+        Minesweeper savedGame = new Minesweeper();                           // Creates  a new game to save
 
-        // Check if a Game already exists (max. 1 Game at a Time possible)
-        Optional<Minesweeper> existingGame = minesweeperRepo.findById(1L);
+        Optional<Minesweeper> existingGame = minesweeperRepo.findById(1L);  // tries to find an existing game
         if(existingGame.isPresent()) {
-            existingGame.get().resetMinesweeper();    // reset Game if present
-            savedGame = existingGame.get();         // overwrite Game to save
+            existingGame.get().resetMinesweeper();                          // resets the game if its existing
+            savedGame = existingGame.get();                                 // overwrite the game to save to the existing one
         }
-        minesweeperRepo.save(savedGame);
+        minesweeperRepo.save(savedGame);                                    // saves the game in the db
         return savedGame;
     }
 
+    // clicks a tile
     public void clickTile(Tile tile) {
-        if(!tile.isClicked()){
-            tile.setClicked(true);
-            tile.getMinesweeper().clickTile();
+        if(!tile.isClicked()){                                              // checks if this tile was already clicked
+            tile.setClicked(true);                                          // sets the clicked attribute to true
+            tile.getMinesweeper().clickTile();                              // triggers a click in the minesweeper to count the clicks
         }
     }
 
+    // sets the minesweeper to loose
     public void looseGame(Minesweeper minesweeper) {
-        minesweeper.setGameOver(true);
-        minesweeperRepo.save(minesweeper);
+        minesweeper.setGameOver(true);                                      // changes gameOver to true
+        minesweeperRepo.save(minesweeper);                                  // saves the minesweeper in the db
     }
 }

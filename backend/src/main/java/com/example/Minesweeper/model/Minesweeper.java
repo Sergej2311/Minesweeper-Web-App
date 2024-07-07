@@ -14,6 +14,7 @@ public class Minesweeper {
     @SequenceGenerator(name = "minesweeper_generator", sequenceName = "minesweeper_seq", allocationSize = 1)
     private Long id;
 
+    // this entity holds the attributes of a minesweeper game
     private int numRows;
     private int numCols;
     private int tilesSum;
@@ -22,6 +23,7 @@ public class Minesweeper {
     boolean gameWon;
     boolean gameOver;
 
+    // constructor when generating a game
     public Minesweeper() {
         this.numRows = 8;
         this.numCols = numRows;
@@ -32,6 +34,7 @@ public class Minesweeper {
         this.gameWon = false;
     }
 
+    // resets a minesweeper for a new game
     public void resetMinesweeper() {
         this.numRows = 8;
         this.numCols = numRows;
@@ -42,10 +45,11 @@ public class Minesweeper {
         this.gameWon = false;
     }
 
+    // increases the click counter
     public void clickTile() {
         this.tilesClicked++;
-        if (this.tilesClicked == this.tilesSum) {
-            this.gameWon = true;
+        if (this.tilesClicked == this.tilesSum) {   // checks if all tiles are clicked
+            this.gameWon = true;                    // if so, the game is won
         }
     }
 }

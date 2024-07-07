@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 public class MinesweeperController {
 
+    // loads all repos and services to work with the data
     @Autowired
     private MinesweeperRepo minesweeperRepo;
     @Autowired
@@ -25,68 +26,62 @@ public class MinesweeperController {
     @Autowired
     private TileService tileService;
 
-    //creates a new game
+    //called when starting a new game
     @GetMapping("/minesweeper/initialize")
     public ResponseEntity<?> firstMinesweeper(){
-        Minesweeper newMinesweeper = minesweeperService.startGame();        // starts new game
-        tileService.generateTiles(newMinesweeper);                          // generates the mineTiles
+        Minesweeper newMinesweeper = minesweeperService.startGame();        // starts a new game
+        tileService.generateTiles(newMinesweeper);                          // generates the tiles for the new game
         return new ResponseEntity<>(HttpStatus.OK);                         // returns new game and httpstatus
     }
 
+    // called when accessing the data of the minesweeper entity
     @GetMapping("/minesweeper/{id}")
     public ResponseEntity<Minesweeper> getMinesweeper(@PathVariable Long id) {
-        if (minesweeperRepo.findById(id).isPresent()) {
+        if (minesweeperRepo.findById(id).isPresent()) {                     // checks if this minesweeper exists
             Minesweeper minesweeper = minesweeperRepo.findById(id).get();
-            return new ResponseEntity<>(minesweeper, HttpStatus.OK);
+            return new ResponseEntity<>(minesweeper, HttpStatus.OK);        // returns minesweeper and httpstatus
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    // called when accessing the data of all tile entities
     @GetMapping("/tiles/all")
     public ResponseEntity<List<Tile>> getAllMineTiles() {
-        try {
-            List<Tile> tileList = new ArrayList<>(tileRepo.findAll());
-
-            if (tileList.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(tileList, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        List<Tile> tileList = new ArrayList<>(tileRepo.findAll());          // finds all saved tiles from the db
+        return new ResponseEntity<>(tileList, HttpStatus.OK);               // returns all tiles in a list
     }
 
+    // called when lft-clicking a tile
     @PostMapping("/tiles/left-click/{id}")
-    public ResponseEntity<?> leftClickTile(@PathVariable Long id, @RequestBody Minesweeper minesweeper) {
-        // Check if tile was a mine
-        if(tileRepo.getReferenceById(id).isMine()){
-            minesweeperService.looseGame(minesweeper);  // loose game
+    public ResponseEntity<?> leftClickTile(@PathVariable Long id, @RequestBody Minesweeper minesweeper) {   // needs the tileId and the minesweeper
+        if(tileRepo.getReferenceById(id).isMine()){                          // checks if this tile is a mine
+            minesweeperService.looseGame(minesweeper);                       // sets gameOver to true
         }
         else{
-            tileService.revealMinesAroundTile(id);
+            tileService.revealMinesAroundTile(id);                          // reveals the mineCount around this tile
             Tile tileToReveal = tileRepo.getReferenceById(id);
-            if (tileToReveal.getMinesAround() == 0) {
-                for (Long tileId : tileToReveal.getTileIdsAround()) {
-                    tileService.revealMinesAroundTile(tileId);
+            if (tileToReveal.getMinesAround() == 0) {                       // checks if this tile has no surrounding mines
+                for (Long tileId : tileToReveal.getTileIdsAround()) {       // iterates through surrounding tiles
+                    tileService.revealMinesAroundTile(tileId);              // reveals the mineCount for every surrounding tile
                 }
             }
-            tileService.revealMinesAroundTile(id);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // called when right-clicking a tile
     @GetMapping("/tiles/right-click/{id}")
     public ResponseEntity<?> rightClickTile(@PathVariable Long id) {
-        if(tileRepo.getReferenceById(id).isMine()){
-            tileService.setFlag(id);
+        if(tileRepo.getReferenceById(id).isMine()){                         // checks if this tile is a mine
+            tileService.setFlag(id);                                        // if so, then sets a flag
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // called when solving a game by showing the mines
     @GetMapping("/tiles/solve")
     public ResponseEntity<?> solve() {
-        tileService.solve();
+        tileService.solve();                                                 // solves the game
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
