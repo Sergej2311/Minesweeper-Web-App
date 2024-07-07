@@ -1,9 +1,8 @@
 <h1 *ngIf="minesweeper.gameWon">DU HAST GEWONNEN!</h1>
-<h1> {{ minesweeper.tilesClicked }} </h1>
 <div>
   <div class="minesweeper-board">
     <div class="board-row" *ngFor="let row of tiles.slice(0,8)">
-      <div class="board-col" *ngFor="let tile of tiles.slice((row.id-1)*8, (row.id*8))"><button class="board-tile" (click)="leftClickTile(tile.id, minesweeper)" (contextmenu)="rightClickTile(tile.id, minesweeper)" >{{tile.tileText}}</button></div>
+      <div class="board-col" *ngFor="let tile of tiles.slice((row.id-1)*8, (row.id*8))"><button class="board-tile tile-{{tile.tileText}} tile-clicked-{{tile.clicked}}" (click)="leftClickTile(tile.id, minesweeper)" (contextmenu)="rightClickTile(tile.id, minesweeper)" >{{tile.tileText}}</button></div>
     </div>
   </div>
 </div>

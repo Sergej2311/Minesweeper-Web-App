@@ -20,18 +20,17 @@ public class MinesweeperController {
     private MinesweeperRepo minesweeperRepo;
     @Autowired
     private MinesweeperService minesweeperService;
-
     @Autowired
     private TileRepo tileRepo;
     @Autowired
     private TileService tileService;
 
     //creates a new game
-    @GetMapping("/createGame")
-    public ResponseEntity<?> startGame(){
+    @GetMapping("/minesweeper/initialize")
+    public ResponseEntity<?> firstMinesweeper(){
         Minesweeper newMinesweeper = minesweeperService.startGame();        // starts new game
         tileService.generateTiles(newMinesweeper);                          // generates the mineTiles
-        return new ResponseEntity<>(HttpStatus.OK);         // returns new game and httpstatus
+        return new ResponseEntity<>(HttpStatus.OK);                         // returns new game and httpstatus
     }
 
     @GetMapping("/minesweeper/{id}")

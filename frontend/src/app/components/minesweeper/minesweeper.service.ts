@@ -1,26 +1,30 @@
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Minesweeper} from "./minesweeper";
+import {Minesweeper, Tile} from "./minesweeper";
 import {Injectable} from "@angular/core";
 
 @Injectable({providedIn: 'root'})
 export class MinesweeperService {
-  private apiUrl = 'http://localhost:8080';
+  private backendUrl = 'http://localhost:8080';
   constructor(private http: HttpClient) { }
 
-  public startMinesweeper(): Observable<Minesweeper> {
-    return this.http.get<Minesweeper>(`${this.apiUrl}/createGame`);
+  public initializeMinesweeper(): Observable<Minesweeper> {
+    return this.http.get<Minesweeper>(`${this.backendUrl}/minesweeper/initialize`);
   }
 
   public getMinesweeper(): Observable<Minesweeper> {
-    return this.http.get<Minesweeper>(`${this.apiUrl}/minesweeper/1`);
+    return this.http.get<Minesweeper>(`${this.backendUrl}/minesweeper/1`);
   }
 
-  public leftClickTile(tileId: number, gameboard: Minesweeper): Observable<Minesweeper> {
-    return this.http.post<Minesweeper>(`${this.apiUrl}/tiles/left-click/${tileId}`, gameboard);
+  public getTiles(): Observable<Tile[]> {
+    return this.http.get<Tile[]>(`${this.backendUrl}/tiles/all`)
   }
 
-  public rightClickTile(tileId: number, gameboard: Minesweeper): Observable<Minesweeper> {
-    return this.http.post<Minesweeper>(`${this.apiUrl}/tiles/right-click/${tileId}`, gameboard);
+  public leftClickTile(tileId: number, minesweeper: Minesweeper): Observable<Minesweeper> {
+    return this.http.post<Minesweeper>(`${this.backendUrl}/tiles/left-click/${tileId}`, minesweeper);
+  }
+
+  public rightClickTile(tileId: number, minesweeper: Minesweeper): Observable<Minesweeper> {
+    return this.http.post<Minesweeper>(`${this.backendUrl}/tiles/right-click/${tileId}`, minesweeper);
   }
 }

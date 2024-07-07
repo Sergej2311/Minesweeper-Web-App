@@ -31,6 +31,14 @@ h1 {
   background-color: #ecf8ff;
 }
 
+.tile-0 {
+  color: rgba(255, 255, 255, 0);
+}
+
+.tile-clicked-true {
+  background: #97b2ff;
+}
+
 .board-tile:hover {
-  background-color: #d5f1ff;
+  opacity: 0.9;
 }

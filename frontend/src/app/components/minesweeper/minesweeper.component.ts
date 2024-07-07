@@ -4,7 +4,6 @@ import {MinesweeperService} from "./minesweeper.service";
 import {NgFor, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
-import {TileService} from "./tile.service";
 
 @Component({
   selector: 'minesweeper',
@@ -21,17 +20,16 @@ export class MinesweeperComponent implements OnInit{
   public minesweeper: Minesweeper;
   public tiles: Tile[] = [];
 
-  constructor(private minesweeperService: MinesweeperService, private tileService: TileService) { }
+  constructor(private minesweeperService: MinesweeperService) { }
 
   ngOnInit() {
-    this.createGame();
+    this.initializeMinesweeper();
+    document.addEventListener('contextmenu', event => event.preventDefault());
   }
 
-  public loadGame() {
+  public loadData() {
     this.getMinesweeper();
     this.getTiles();
-    this.getMinesweeper();
-    document.addEventListener('contextmenu', event => event.preventDefault());
   }
 
   public getMinesweeper(): void {
@@ -46,7 +44,7 @@ export class MinesweeperComponent implements OnInit{
   }
 
   public getTiles(): void {
-    this.tileService.getTiles().subscribe(
+    this.minesweeperService.getTiles().subscribe(
       (response: Tile[]) => {
         this.tiles = response;
       },
@@ -56,10 +54,10 @@ export class MinesweeperComponent implements OnInit{
     );
   }
 
-  public createGame(): void {
-    this.minesweeperService.startMinesweeper().subscribe(
+  public initializeMinesweeper(): void {
+    this.minesweeperService.initializeMinesweeper().subscribe(
       () => {
-        this.loadGame();
+        this.loadData();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -70,8 +68,7 @@ export class MinesweeperComponent implements OnInit{
   public leftClickTile(tileId: number, gameboard: Minesweeper): void {
     this.minesweeperService.leftClickTile(tileId, gameboard).subscribe(
       () => {
-        this.getTiles();
-        this.getMinesweeper();
+        this.loadData();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -82,8 +79,7 @@ export class MinesweeperComponent implements OnInit{
   public rightClickTile(tileId: number, gameboard: Minesweeper): void {
     this.minesweeperService.rightClickTile(tileId, gameboard).subscribe(
       () => {
-        this.getTiles();
-        this.getMinesweeper();
+        this.loadData();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
