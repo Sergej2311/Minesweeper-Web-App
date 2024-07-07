@@ -70,4 +70,13 @@ public class MinesweeperController {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping("/tiles/right-click/{id}")
+    public ResponseEntity<?> rightClickTile(@PathVariable Long id, @RequestBody Minesweeper minesweeper) {
+        if(tileRepo.getReferenceById(id).isMine()){
+            tileService.setFlag(id);
+            minesweeperService.clickTile(minesweeper);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

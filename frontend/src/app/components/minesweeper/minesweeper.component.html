@@ -2,7 +2,7 @@
 <div>
   <div class="minesweeper-board">
     <div class="board-row" *ngFor="let row of tiles.slice(0,8)">
-      <div *ngFor="let tile of tiles.slice((row.id-1)*8, (row.id*8))"><button class="board-tile" (click)="leftClickTile(tile.id, minesweeper)" (contextmenu)="rightClickTile()" >{{tile.tileText}}</button></div>
+      <div *ngFor="let tile of tiles.slice((row.id-1)*8, (row.id*8))"><button class="board-tile" (click)="leftClickTile(tile.id, minesweeper)" (contextmenu)="rightClickTile(tile.id, minesweeper)" >{{tile.tileText}}</button></div>
     </div>
   </div>
 </div>

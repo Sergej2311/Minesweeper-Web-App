@@ -19,4 +19,8 @@ export class MinesweeperService {
   public leftClickTile(tileId: number, gameboard: Minesweeper): Observable<Minesweeper> {
     return this.http.post<Minesweeper>(`${this.apiUrl}/tiles/left-click/${tileId}`, gameboard);
   }
+
+  public rightClickTile(tileId: number, gameboard: Minesweeper): Observable<Minesweeper> {
+    return this.http.post<Minesweeper>(`${this.apiUrl}/tiles/right-click/${tileId}`, gameboard);
+  }
 }

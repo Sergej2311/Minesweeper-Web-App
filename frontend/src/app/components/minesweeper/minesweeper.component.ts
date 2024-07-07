@@ -79,7 +79,15 @@ export class MinesweeperComponent implements OnInit{
     );
   }
 
-  public rightClickTile(): void {
-    alert("right clicked!")
+  public rightClickTile(tileId: number, gameboard: Minesweeper): void {
+    this.minesweeperService.rightClickTile(tileId, gameboard).subscribe(
+      () => {
+        this.getTiles();
+        this.getMinesweeper();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 }

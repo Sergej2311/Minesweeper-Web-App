@@ -55,4 +55,10 @@ public class TileService {
         tileRepo.save(checkedTile);
     }
 
+    public void setFlag(Long id) {
+        Tile flagedTile = tileRepo.getReferenceById(id);
+        flagedTile.setTileText("F");
+        tileRepo.save(flagedTile);
+    }
+
 }
