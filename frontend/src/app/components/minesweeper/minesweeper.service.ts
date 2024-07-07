@@ -1,6 +1,6 @@
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Gameboard} from "./minesweeper";
+import {Minesweeper} from "./minesweeper";
 import {Injectable} from "@angular/core";
 
 @Injectable({providedIn: 'root'})
@@ -8,15 +8,15 @@ export class MinesweeperService {
   private apiUrl = 'http://localhost:8080';
   constructor(private http: HttpClient) { }
 
-  public startMinesweeper(): Observable<Gameboard> {
-    return this.http.get<Gameboard>(`${this.apiUrl}/createGame`);
+  public startMinesweeper(): Observable<Minesweeper> {
+    return this.http.get<Minesweeper>(`${this.apiUrl}/createGame`);
   }
 
-  public getGameBoards(): Observable<Gameboard[]> {
-    return this.http.get<Gameboard[]>(`${this.apiUrl}/getAllGames`);
+  public getMinesweeper(): Observable<Minesweeper[]> {
+    return this.http.get<Minesweeper[]>(`${this.apiUrl}/getAllGames`);
   }
 
-  public leftClickTile(tileId: number, gameboard: Gameboard): Observable<Gameboard> {
-    return this.http.post<Gameboard>(`${this.apiUrl}/tiles/left-click/${tileId}`, gameboard);
+  public leftClickTile(tileId: number, gameboard: Minesweeper): Observable<Minesweeper> {
+    return this.http.post<Minesweeper>(`${this.apiUrl}/tiles/left-click/${tileId}`, gameboard);
   }
 }

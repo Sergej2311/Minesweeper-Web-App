@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Gameboard, Tile} from "./minesweeper";
+import {Minesweeper, Tile} from "./minesweeper";
 import {MinesweeperService} from "./minesweeper.service";
 import {NgFor, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
@@ -18,10 +18,10 @@ import {TileService} from "./tile.service";
   styleUrl: './minesweeper.component.css'
 })
 export class MinesweeperComponent implements OnInit{
-  public gameBoards: Gameboard[] = [];
+  public minesweepers: Minesweeper[] = [];
   public tiles: Tile[] = [];
 
-  constructor(private gameboardService: MinesweeperService, private tileService: TileService) { }
+  constructor(private minesweeperService: MinesweeperService, private tileService: TileService) { }
 
   ngOnInit() {
     this.createGame();
@@ -33,9 +33,9 @@ export class MinesweeperComponent implements OnInit{
   }
 
   public getGameBoards(): void {
-    this.gameboardService.getGameBoards().subscribe(
-      (response: Gameboard[]) => {
-        this.gameBoards = response;
+    this.minesweeperService.getMinesweeper().subscribe(
+      (response: Minesweeper[]) => {
+        this.minesweepers = response;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -55,7 +55,7 @@ export class MinesweeperComponent implements OnInit{
   }
 
   public createGame(): void {
-    this.gameboardService.startMinesweeper().subscribe(
+    this.minesweeperService.startMinesweeper().subscribe(
       () => {
         this.getGameBoards();
       },
@@ -65,8 +65,8 @@ export class MinesweeperComponent implements OnInit{
     );
   }
 
-  public leftClickTile(tileId: number, gameboard: Gameboard): void {
-    this.gameboardService.leftClickTile(tileId, gameboard).subscribe(
+  public leftClickTile(tileId: number, gameboard: Minesweeper): void {
+    this.minesweeperService.leftClickTile(tileId, gameboard).subscribe(
       () => {
         this.getGameBoards();
       },

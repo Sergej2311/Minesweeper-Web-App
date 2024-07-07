@@ -1,4 +1,4 @@
-export interface Gameboard {
+export interface Minesweeper {
   id: number;
   numRows: number;
   numCols: number;
@@ -10,7 +10,7 @@ export interface Gameboard {
 
 export interface Tile {
   id: number;
-  gameBoard: Gameboard;
+  gameBoard: Minesweeper;
   tileRow: number;
   tileColumn: number;
   mine: boolean;
