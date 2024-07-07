@@ -31,6 +31,7 @@ export class MinesweeperComponent implements OnInit{
     this.getMinesweeper();
     this.getTiles();
     this.getMinesweeper();
+    document.addEventListener('contextmenu', event => event.preventDefault());
   }
 
   public getMinesweeper(): void {
