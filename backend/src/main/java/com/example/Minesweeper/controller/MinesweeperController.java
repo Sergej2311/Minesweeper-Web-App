@@ -34,6 +34,15 @@ public class MinesweeperController {
         return new ResponseEntity<>(HttpStatus.OK);         // returns new game and httpstatus
     }
 
+    @GetMapping("/minesweeper/{id}")
+    public ResponseEntity<Minesweeper> getMinesweeper(@PathVariable Long id) {
+        if (minesweeperRepo.findById(id).isPresent()) {
+            Minesweeper minesweeper = minesweeperRepo.findById(id).get();
+            return new ResponseEntity<>(minesweeper, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     @GetMapping("/tiles/all")
     public ResponseEntity<List<Tile>> getAllMineTiles() {
         try {
@@ -47,15 +56,6 @@ public class MinesweeperController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    @GetMapping("/minesweeper/{id}")
-    public ResponseEntity<Minesweeper> getMinesweeper(@PathVariable Long id) {
-        if (minesweeperRepo.findById(id).isPresent()) {
-            Minesweeper minesweeper = minesweeperRepo.findById(id).get();
-            return new ResponseEntity<>(minesweeper, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PostMapping("/tiles/left-click/{id}")
