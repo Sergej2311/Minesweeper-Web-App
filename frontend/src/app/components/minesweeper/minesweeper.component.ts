@@ -18,6 +18,8 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class MinesweeperComponent implements OnInit{
   public minesweeper: Minesweeper;
+  public gameWon: boolean = false;
+  public gameOver: boolean = false;
   public tiles: Tile[] = [];
 
   constructor(private minesweeperService: MinesweeperService, @Inject(DOCUMENT) private document: Document) { }
@@ -36,6 +38,8 @@ export class MinesweeperComponent implements OnInit{
     this.minesweeperService.getMinesweeper().subscribe(
       (response: Minesweeper) => {
         this.minesweeper = response;
+        this.gameWon = this.minesweeper.gameWon;
+        this.gameOver = this.minesweeper.gameOver;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

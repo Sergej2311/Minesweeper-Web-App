@@ -1,4 +1,6 @@
 <div>
+  <h1 *ngIf="gameWon">You have won!</h1>
+  <h1 *ngIf="gameOver">You have lost :(</h1>
   <div class="minesweeper-board">
     <div class="board-row" *ngFor="let row of tiles.slice(0,8)">
       <div class="board-col" *ngFor="let tile of tiles.slice((row.id-1)*8, (row.id*8))"><button class="board-tile tile-{{tile.tileText}} tile-clicked-{{tile.clicked}} tile-mine-{{tile.mine}}" (click)="leftClickTile(tile.id, minesweeper)" (contextmenu)="rightClickTile(tile.id)" >{{tile.tileText}}</button></div>
@@ -6,6 +8,6 @@
   </div>
   <div class="buttons">
     <button id="btn-solve" (click)="solve()">Solve</button>
-    <button id="btn-restart" (click)="initializeMinesweeper()">Restart</button>
+    <button class="btn-restart" (click)="initializeMinesweeper()">Restart</button>
   </div>
 </div>

@@ -51,10 +51,9 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 2rem;
 }
 
-#btn-restart {
+.btn-restart {
   border-style: solid;
   border-color: #cb0505;
   border-radius: 5px;
@@ -65,7 +64,7 @@ h1 {
   transition: all 0.3s ease 0s;
 }
 
-#btn-restart:hover {
+.btn-restart:hover {
   color: #fde4e4;
   background-color: #e14040;
   box-shadow: 0 8px 20px rgba(229, 46, 80, 0.4);
