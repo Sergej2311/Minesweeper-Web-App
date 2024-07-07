@@ -69,6 +69,7 @@ export class MinesweeperComponent implements OnInit{
   public leftClickTile(tileId: number, gameboard: Minesweeper): void {
     this.minesweeperService.leftClickTile(tileId, gameboard).subscribe(
       () => {
+        this.getTiles();
         this.getMinesweeper();
       },
       (error: HttpErrorResponse) => {

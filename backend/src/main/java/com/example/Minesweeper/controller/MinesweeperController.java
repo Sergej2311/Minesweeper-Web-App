@@ -28,10 +28,10 @@ public class MinesweeperController {
 
     //creates a new game
     @GetMapping("/createGame")
-    public ResponseEntity<Minesweeper> startGame(){
+    public ResponseEntity<?> startGame(){
         Minesweeper newMinesweeper = minesweeperService.startGame();        // starts new game
         tileService.generateTiles(newMinesweeper);                          // generates the mineTiles
-        return new ResponseEntity<>(newMinesweeper, HttpStatus.OK);         // returns new game and httpstatus
+        return new ResponseEntity<>(HttpStatus.OK);         // returns new game and httpstatus
     }
 
     @GetMapping("/tiles/all")
@@ -49,32 +49,6 @@ public class MinesweeperController {
         }
     }
 
-    @PostMapping("/tiles/left-click/{id}")
-    public ResponseEntity<Minesweeper> leftClickTile(@PathVariable Long id, @RequestBody Minesweeper minesweeper) {
-        // Check if tile was a mine
-        if(tileRepo.getReferenceById(id).isMine()){
-            minesweeperService.looseGame(minesweeper);  // loose game
-        }
-        tileService.countMinesAroundTile(id);
-        minesweeperService.clickTile(minesweeper);
-        return new ResponseEntity<>(minesweeper, HttpStatus.OK);
-    }
-
-    @GetMapping("/getAllGames")
-    public ResponseEntity<List<Minesweeper>> getAllMinesweepers() {
-        try {
-            List<Minesweeper> gameBoardList = new ArrayList<>(minesweeperRepo.findAll());
-
-            if (gameBoardList.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(gameBoardList, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
     @GetMapping("/minesweeper/{id}")
     public ResponseEntity<Minesweeper> getMinesweeper(@PathVariable Long id) {
         if (minesweeperRepo.findById(id).isPresent()) {
@@ -82,5 +56,18 @@ public class MinesweeperController {
             return new ResponseEntity<>(minesweeper, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/tiles/left-click/{id}")
+    public ResponseEntity<?> leftClickTile(@PathVariable Long id, @RequestBody Minesweeper minesweeper) {
+        // Check if tile was a mine
+        if(tileRepo.getReferenceById(id).isMine()){
+            minesweeperService.looseGame(minesweeper);  // loose game
+        }
+        else{
+            tileService.countMinesAroundTile(id);
+            minesweeperService.clickTile(minesweeper);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

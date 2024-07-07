@@ -43,19 +43,16 @@ public class TileService {
     }
 
     public void countMinesAroundTile(Long id) {
+        Tile checkedTile = tileRepo.getReferenceById(id);
+        List<Long> tilesAround = checkedTile.getTileIdsAround();
         int minesAround = 0;
-        List<Long> aroundTiles = List.of(1L, 7L, 8L, 9L);
-
-        for (Long tileId : aroundTiles) {
-            if(tileRepo.getReferenceById(id-tileId).isMine()){ // checks tile around top left, top, top right and left
-                minesAround++;
-            }
-            if(tileRepo.getReferenceById(id+tileId).isMine()){  // checks tile around bottom left, bottom, bottom right and right
+        for (Long tileAround : tilesAround) {
+            if(tileRepo.getReferenceById(tileAround).isMine()){
                 minesAround++;
             }
         }
-        tileRepo.getReferenceById(id).setTileText(String.valueOf(minesAround));  // writes number of mines around in tile Text
-        tileRepo.save(tileRepo.getReferenceById(id));
+        checkedTile.setTileText(String.valueOf(minesAround));  // writes number of mines around in tile Text
+        tileRepo.save(checkedTile);
     }
 
 }
