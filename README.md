@@ -8,7 +8,8 @@ To start the web app you have to:
 - install the npm packages with "npm install"
 - navigate to the frontend directory and start with "ng serve"
 
-Now everything should be running. You can acces the game now under your localhost with port 4200 ==> http://localhost:4200
+Now everything should be running. You can acces the game now under your localhost with port 4200
+==> http://localhost:4200
 
 The game should look something like this:
 ![image](https://github.com/user-attachments/assets/c6ba8698-63cb-4d71-950a-c278f42fd52f)
